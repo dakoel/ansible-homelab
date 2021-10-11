@@ -1,0 +1,7 @@
+[application]
+openvpn ansible_host=192.168.178.100
+nextcloud ansible_host=192.168.178.101
+ansible ansible_connection=local
+
+[test]
+debian-test ansible_host=192.168.178.200

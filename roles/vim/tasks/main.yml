@@ -1,0 +1,24 @@
+---
+- name: Install Vim
+  apt:
+    name: vim
+    state: present
+    update_cache: yes
+
+- name: Install Git
+  apt:
+    name: git
+    state: present
+
+- name: Download Vundle
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    dest: ~/.vim/bundle/Vundle.vim
+
+- name: Copy vimrc
+  copy:
+    src: vimrc
+    dest: /etc/vim/vimrc
+
+- name: Install Vim plugins
+  command: vim +PluginInstall +qall

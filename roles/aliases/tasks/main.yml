@@ -1,0 +1,6 @@
+---
+- name: Add 'll' alias
+  lineinfile:
+    path: /etc/profile
+    line: alias ll="ls -la"
+    state: present
