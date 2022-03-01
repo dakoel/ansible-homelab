@@ -17,8 +17,3 @@
 
 - name: Set zsh as default shell
   shell: chsh -s /bin/zsh
-
-- name: Enable vi keybinding
-  lineinfile:
-    path: ~/.zshrc
-    line: bindkey -v

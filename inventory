@@ -5,6 +5,7 @@ pve ansible_host=192.168.178.51
 openvpn ansible_host=192.168.178.100
 nextcloud ansible_host=192.168.178.101
 ansible ansible_connection=local
+wordpress ansible_host=192.168.178.103
 
-[test]
-debian-test ansible_host=192.168.178.200
+[other]
+debian ansible_host=192.168.178.200

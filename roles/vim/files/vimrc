@@ -1,18 +1,26 @@
-" Vundle
+" Vundle                                                                                                                                                                                          
 set nocompatible
-filetype off
+filetype off 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'joshdick/onedark.vim'
-Plugin 'preservim/nerdtree'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'vim-airline/vim-airline'
+ Plugin 'VundleVim/Vundle.vim'
+ Plugin 'joshdick/onedark.vim'
+ Plugin 'sheerun/vim-polyglot'
+ Plugin 'vim-airline/vim-airline'
 call vundle#end()
 filetype plugin indent on
 
-" Other settings
+" Visuals
 syntax on
 silent! colorscheme onedark
 set number
-nmap _ :NERDTreeToggle<CR>
+set cursorline
+set nowrap
+
+" Search settings
+set ignorecase
+set hlsearch
+set incsearch
+
+" Key mappings
+nnoremap <esc><esc> :silent! nohls<cr>
