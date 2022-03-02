@@ -1,0 +1,7 @@
+---
+- name: Setup
+  hosts: all
+  roles:
+    - install-basic-applications
+    - update-dotfiles
+    - symlink-dotfiles

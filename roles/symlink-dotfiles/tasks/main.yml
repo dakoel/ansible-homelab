@@ -1,0 +1,12 @@
+---
+- name: Create symbolic link for .vimrc
+  file:
+    src: ~/.dotfiles/vim/.vimrc
+    dest: ~/.vimrc
+    state: link
+
+- name: Create symbolic link for .zshrc
+  file:
+    src: ~/.dotfiles/zsh/.zshrc
+    dest: ~/.zshrc
+    state: link

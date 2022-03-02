@@ -1,0 +1,22 @@
+---
+- name: Install zsh
+  apt:
+    name: zsh
+    state: present
+    update_cache: yes
+    cache_valid_time: 600
+
+- name: Set zsh as default shell
+  shell: chsh -s /bin/zsh
+
+- name: Install Vim
+  apt:
+    name: vim
+    state: present
+    update_cache: yes
+    cache_valid_time: 600
+
+- name: Install Git
+  apt:
+    name: git
+    state: present
