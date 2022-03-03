@@ -20,3 +20,13 @@
   apt:
     name: git
     state: present
+
+- name: Install htop
+  apt:
+    name: htop
+    state: present
+
+- name: Install tmux
+  apt:
+    name: tmux
+    state: present

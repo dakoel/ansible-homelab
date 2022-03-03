@@ -10,3 +10,9 @@
     src: ~/.dotfiles/zsh/.zshrc
     dest: ~/.zshrc
     state: link
+
+- name: Create symbolic link for .tmux.conf
+  file:
+    src: ~/.dotfiles/tmux/.tmux.conf
+    dest: ~/.tmux.conf
+    state: link
