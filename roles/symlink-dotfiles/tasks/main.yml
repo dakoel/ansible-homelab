@@ -10,6 +10,17 @@
     dest: ~/.zshrc
     state: link
 
+- name: Create a .config directory if it does not exist
+  file:
+    path: ~/.config
+    state: directory
+
+- name: Create symbolic link for nvim
+  file:
+    src: ~/.dotfiles/nvim/
+    dest: ~/.config/nvim
+    state: link
+
 - name: Create symbolic link for .tmux.conf
   file:
     src: ~/.dotfiles/tmux/.tmux.conf
