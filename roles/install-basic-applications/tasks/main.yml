@@ -47,11 +47,6 @@
         repo: https://github.com/wbthomason/packer.nvim
         dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-- name: Install htop
-  apt:
-    name: htop
-    state: present
-
 - name: Install tmux
   apt:
     name: tmux
