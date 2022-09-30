@@ -3,3 +3,4 @@
   hosts: docker
   roles:
     - update-docker-monitoring
+    - update-docker-gitea
