@@ -1,0 +1,10 @@
+---
+- name: Pull images
+  shell:
+    cmd: docker-compose pull
+    chdir: ~/monitoring
+
+- name: Restart containers
+  shell:
+    cmd: docker-compose up -d
+    chdir: ~/monitoring

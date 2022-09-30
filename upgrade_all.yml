@@ -4,3 +4,8 @@
   roles:
     - upgrade-packages
     - update-dotfiles
+
+- name: Update docker
+  hosts: docker
+  roles:
+    - update-docker-monitoring
