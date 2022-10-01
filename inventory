@@ -1,7 +1,5 @@
-[proxmox]
-pve ansible_host=192.168.178.51
-
 [application]
+proxmox ansible_host=192.168.178.51
 openvpn ansible_host=192.168.178.100
 nextcloud ansible_host=192.168.178.101
 ansible ansible_connection=local
