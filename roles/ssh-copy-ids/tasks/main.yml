@@ -1,0 +1,10 @@
+---
+- name: Copy public keys
+  authorized_key:
+    user: root
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - ansible
+    - macbook
+    - xps13
