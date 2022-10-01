@@ -1,2 +1,0 @@
-[test]
-test-debian ansible_host=192.168.178.202
