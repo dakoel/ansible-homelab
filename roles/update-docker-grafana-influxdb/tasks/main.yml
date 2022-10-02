@@ -2,9 +2,9 @@
 - name: Pull images
   shell:
     cmd: docker-compose pull
-    chdir: ~/monitoring
+    chdir: ~/grafana_influxdb
 
 - name: Restart containers
   shell:
     cmd: docker-compose up -d
-    chdir: ~/monitoring
+    chdir: ~/grafana_influxdb

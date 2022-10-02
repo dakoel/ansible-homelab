@@ -2,5 +2,5 @@
 - name: Update docker containers
   hosts: docker
   roles:
-    - update-docker-monitoring
+    - update-docker-grafana-influxdb
     - update-docker-gitea
