@@ -1,0 +1,10 @@
+---
+- name: Pull images ({{ directory }})
+  shell:
+    cmd: docker-compose pull
+    chdir: "{{ directory }}"
+
+- name: Restart containers ({{ directory }})
+  shell:
+    cmd: docker-compose up -d
+    chdir: "{{ directory }}"

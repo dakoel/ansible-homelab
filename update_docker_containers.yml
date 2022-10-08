@@ -2,5 +2,6 @@
 - name: Update docker containers
   hosts: docker
   roles:
-    - update-docker-grafana-influxdb
-    - update-docker-gitea
+    - { role: update-docker-container, directory: '~/grafana_influxdb' }
+    - { role: update-docker-container, directory: '~/gitea' }
+    - { role: update-docker-container, directory: '~/your_spotify' }
