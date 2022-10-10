@@ -5,4 +5,3 @@
     - make-basic-configurations
     - install-basic-applications
     - update-dotfiles
-    - symlink-dotfiles
