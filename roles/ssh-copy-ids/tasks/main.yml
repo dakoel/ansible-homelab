@@ -7,4 +7,4 @@
   with_file:
     - ansible
     - macbook
-    - xps13
+    - xps9315
