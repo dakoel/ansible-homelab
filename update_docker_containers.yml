@@ -5,3 +5,4 @@
     - { role: update-docker-container, directory: '~/grafana_influxdb' }
     - { role: update-docker-container, directory: '~/gitea' }
     - { role: update-docker-container, directory: '~/your_spotify' }
+    - { role: update-docker-container, directory: '~/navidrome' }
