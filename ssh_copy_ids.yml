@@ -1,5 +1,0 @@
----
-- name: SSH copy IDs
-  hosts: all
-  roles:
-    - ssh-copy-ids

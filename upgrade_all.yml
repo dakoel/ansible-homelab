@@ -1,6 +1,0 @@
----
-- name: Upgrade all
-  hosts: all
-  roles:
-    - upgrade-packages
-    - update-dotfiles

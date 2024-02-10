@@ -1,7 +1,0 @@
----
-- name: Setup
-  hosts: all
-  roles:
-    - make-basic-configurations
-    - install-basic-applications
-    - update-dotfiles
