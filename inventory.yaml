@@ -4,7 +4,7 @@ all:
     docker_host:
       hosts:
         your_spotify:
-          ansible_host: 192.168.178.200
+          ansible_host: 192.168.0.200
           ansible_user: user
           spotify_public: !vault |
             $ANSIBLE_VAULT;1.1;AES256
