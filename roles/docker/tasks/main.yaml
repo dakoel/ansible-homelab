@@ -29,7 +29,7 @@
       - docker==6.1.3
       - docker-compose
 
-- name: Ensure user is added to the docker group
+- name: Add {{ ansible_user }} to docker group
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     groups: docker

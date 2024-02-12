@@ -1,0 +1,25 @@
+---
+- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
+    state: directory
+
+- name: Copy SSH public key
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.ssh/id_ed25519.pub"
+    content: "{{ ssh_public_key }}"
+
+- name: Copy SSH private key
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.ssh/id_ed25519"
+    content: "{{ ssh_private_key }}"
+    mode: 0600
+
+- name: Copy public keys
+  authorized_key:
+    user: "{{ hostvars[inventory_hostname]['ansible_user'] }}"
+    state: present
+    key: "{{ ssh_public_key }}"
+  delegate_to: "{{ item }}"
+  when: item != inventory_hostname
+  with_items: "{{ groups['all'] }}"
