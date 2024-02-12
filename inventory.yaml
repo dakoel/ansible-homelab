@@ -25,6 +25,7 @@ all:
         ansible:
           ansible_host: 192.168.0.201
           ansible_user: user
+          ansible_homelab_branch: feature/rebuild
           ssh_public_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEhkOgvBfBqfru4RbeXvD5z2jOiVs2Wg48ZIBs6XQtjH
           ssh_private_key: !vault |
             $ANSIBLE_VAULT;1.1;AES256
