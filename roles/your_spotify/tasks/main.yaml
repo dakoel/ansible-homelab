@@ -1,14 +1,14 @@
 ---
 - name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/your_spotify"
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
     state: directory
 
 - name: Copy compose.yaml
   ansible.builtin.template:
     src: compose.yaml.j2
-    dest: "{{ ansible_env.HOME }}/your_spotify/compose.yaml"
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/compose.yaml"
 
 - name: Ensure docker compose is up and running
   community.docker.docker_compose:
-    project_src: "{{ ansible_env.HOME }}/your_spotify"
+    project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"

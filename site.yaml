@@ -1,3 +1,4 @@
 ---
+- import_playbook: initial_host_setup.yaml
 - import_playbook: your_spotify.yaml
 - import_playbook: ansible.yaml

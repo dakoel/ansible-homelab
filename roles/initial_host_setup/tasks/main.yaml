@@ -1,0 +1,21 @@
+---
+- name: Set timezone to Europe/Berlin
+  timezone:
+    name: Europe/Berlin
+  become: yes
+
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 600
+  become: yes
+
+# - name: Add SSH public key to authorized_key of other servers
+#   authorized_key:
+#     user: "{{ hostvars[item].ansible_user }}"
+#     state: present
+#     key: "{{ ssh_public_key }}"
+#   delegate_to: "{{ item }}"
+#   when: item != inventory_hostname
+#   with_items: "{{ groups['all'] }}"

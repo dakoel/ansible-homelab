@@ -1,6 +1,4 @@
 ---
 - hosts: ansible
   roles:
-    - timezone
-    - upgrade_packages
     - ansible

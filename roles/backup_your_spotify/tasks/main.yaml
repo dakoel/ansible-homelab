@@ -1,0 +1,17 @@
+---
+- name: Stop docker compose
+  community.docker.docker_compose:
+    project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
+    stopped: true
+
+- name: Download directories to localhost
+  synchronize:
+    mode: pull
+    src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
+    dest: "{{ lookup('env', 'HOME') }}/backup"
+  become: yes
+
+- name: Start docker compose
+  community.docker.docker_compose:
+    project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
+    stopped: false

@@ -1,0 +1,10 @@
+---
+- name: Prepare localhost to save backups
+  hosts: localhost
+  roles:
+    - prepare_backup
+
+- name: Backup your_spotify to localhost
+  hosts: your_spotify
+  roles:
+    - backup_your_spotify

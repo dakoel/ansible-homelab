@@ -1,0 +1,5 @@
+---
+- name: Create directory {{ ansible_env.HOME }}/backup
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/backup"
+    state: directory

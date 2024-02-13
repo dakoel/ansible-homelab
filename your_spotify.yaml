@@ -1,7 +1,5 @@
 ---
 - hosts: your_spotify
   roles:
-    - timezone
-    - upgrade_packages
     - docker
     - your_spotify
