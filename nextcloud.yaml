@@ -1,0 +1,5 @@
+---
+- hosts: nextcloud
+  roles:
+    - docker
+    - nextcloud

@@ -1,0 +1,14 @@
+---
+all:
+  children:
+    docker_host:
+      hosts:
+        ansible:
+          ansible_host: 192.168.0.200
+          ansible_user: user
+        nextcloud:
+          ansible_host: 192.168.0.201
+          ansible_user: user
+        your_spotify:
+          ansible_host: 192.168.0.202
+          ansible_user: user
