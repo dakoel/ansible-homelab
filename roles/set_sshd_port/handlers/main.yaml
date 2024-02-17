@@ -1,0 +1,17 @@
+---
+- name: Restart sshd
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
+  become: yes
+  notify: 
+    - Reset connection
+    - Set ansible_ssh_port
+
+- name: Reset connection
+  meta: reset_connection
+
+- name: Set ansible_ssh_port
+  set_fact:
+    ansible_ssh_port: "{{ sshd_port }}"
+  run_once: true

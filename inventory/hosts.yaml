@@ -9,6 +9,9 @@ all:
         nextcloud:
           ansible_host: 192.168.0.201
           ansible_user: user
-        your_spotify:
+        gitlab:
           ansible_host: 192.168.0.202
+          ansible_user: user
+        your_spotify:
+          ansible_host: 192.168.0.203
           ansible_user: user
