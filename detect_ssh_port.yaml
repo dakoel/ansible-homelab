@@ -1,0 +1,12 @@
+---
+- hosts: gitlab
+  gather_facts: no  # necessary to test SSH port
+  tasks:
+    - name: Test SSH port {{ sshd_port }}
+      local_action: wait_for port={{ sshd_port }} timeout=5 host={{ ansible_host }}
+      register: port_test
+      ignore_errors: yes
+
+    - name: Set ansible_ssh_port
+      set_fact:
+        ansible_ssh_port: "{% if port_test.elapsed < 5 %}{{ sshd_port }}{% else %}22{% endif %}"
