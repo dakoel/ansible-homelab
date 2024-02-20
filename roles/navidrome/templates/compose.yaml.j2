@@ -1,0 +1,15 @@
+---
+version: "3.8"
+
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    ports:
+      - "80:4533"
+    restart: unless-stopped
+    environment:
+        ND_SCANSCHEDULE: 0
+    volumes:
+      - ./data:/data
+      - ./music:/music:ro
+

@@ -1,0 +1,5 @@
+---
+- hosts: navidrome
+  roles:
+    - docker
+    - navidrome
