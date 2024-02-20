@@ -1,0 +1,41 @@
+---
+- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}/config
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/config"
+    state: directory
+
+- name: Create directory /etc/systemd/resolved.conf.d
+  ansible.builtin.file:
+    path: /etc/systemd/resolved.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Disable DNSStubListener in systemd-resolved
+  ansible.builtin.copy:
+    dest: /etc/systemd/resolved.conf.d/10-make-dns-work.conf
+    content: |
+      [Resolve]
+      DNSStubListener=no
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Restart systemd-resolved to apply changes
+  ansible.builtin.systemd:
+    name: systemd-resolved
+    state: restarted
+    daemon_reload: yes
+  become: yes
+
+- name: Copy compose.yaml
+  ansible.builtin.template:
+    src: compose.yaml.j2
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/compose.yaml"
+
+- name: Ensure docker compose is up and running
+  community.docker.docker_compose:
+    project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"

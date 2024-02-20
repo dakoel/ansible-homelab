@@ -1,7 +1,7 @@
 ---
 - import_playbook: detect_ssh_port.yaml
 - import_playbook: initial_host_setup.yaml
-- import_playbook: ansible.yaml
+- import_playbook: pihole.yaml
 - import_playbook: nextcloud.yaml
 - import_playbook: gitlab.yaml
 - import_playbook: your_spotify.yaml

@@ -3,7 +3,7 @@ all:
   children:
     docker_host:
       hosts:
-        ansible:
+        pihole:
           ansible_host: 192.168.0.200
           ansible_user: user
         nextcloud:

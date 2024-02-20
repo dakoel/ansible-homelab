@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: "3.8"
 
 services:
   server:
@@ -12,10 +12,10 @@ services:
     depends_on:
       - mongo
     environment:
-      API_ENDPOINT: http://{{ hostvars['your_spotify'].ansible_host }}:8080
-      CLIENT_ENDPOINT: http://{{ hostvars['your_spotify'].ansible_host }}:80
-      SPOTIFY_PUBLIC: {{ hostvars['your_spotify'].spotify_public }}
-      SPOTIFY_SECRET: {{ hostvars['your_spotify'].spotify_secret }}
+      API_ENDPOINT: http://{{ inventory_hostname }}.{{ dns_root_domain }}:8080
+      CLIENT_ENDPOINT: http://{{ inventory_hostname }}.{{ dns_root_domain }}:80
+      SPOTIFY_PUBLIC: {{ spotify_public }}
+      SPOTIFY_SECRET: {{ spotify_secret }}
   mongo:
     container_name: mongo
     image: mongo:6
@@ -28,4 +28,4 @@ services:
     ports:
       - "80:3000"
     environment:
-      API_ENDPOINT: http://{{ hostvars['your_spotify'].ansible_host }}:8080
+      API_ENDPOINT: http://{{ inventory_hostname }}.{{ dns_root_domain }}:8080
