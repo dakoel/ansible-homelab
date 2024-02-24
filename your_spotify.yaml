@@ -1,5 +1,0 @@
----
-- hosts: your_spotify
-  roles:
-    - docker
-    - your_spotify
