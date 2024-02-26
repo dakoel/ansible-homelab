@@ -1,0 +1,5 @@
+---
+- hosts: reverseproxy
+  roles:
+    - docker
+    - reverseproxy
