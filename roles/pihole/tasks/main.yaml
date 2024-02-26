@@ -1,7 +1,7 @@
 ---
-- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}/config
+- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}/dnsmasq.d
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/config"
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/dnsmasq.d"
     state: directory
 
 - name: Create directory /etc/systemd/resolved.conf.d
@@ -21,14 +21,30 @@
       DNSStubListener=no
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   become: yes
+  register: systemd_resolved
 
 - name: Restart systemd-resolved to apply changes
   ansible.builtin.systemd:
     name: systemd-resolved
     state: restarted
     daemon_reload: yes
+  become: yes
+  when: systemd_resolved.changed
+
+- name: Restart docker to apply changes
+  ansible.builtin.systemd:
+    name: docker
+    state: restarted
+    daemon_reload: yes
+  become: yes
+  when: systemd_resolved.changed
+
+- name: Copy 02-homelab.conf
+  ansible.builtin.template:
+    src: 02-homelab.conf.j2
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/dnsmasq.d/02-homelab.conf"
   become: yes
 
 - name: Copy compose.yaml

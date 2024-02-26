@@ -12,10 +12,11 @@ services:
     depends_on:
       - mongo
     environment:
-      API_ENDPOINT: http://{{ inventory_hostname }}.{{ dns_root_domain }}:8080
-      CLIENT_ENDPOINT: http://{{ inventory_hostname }}.{{ dns_root_domain }}:80
+      API_ENDPOINT: https://yourspotifyapi.{{ domain }}
+      CLIENT_ENDPOINT: https://yourspotify.{{ domain }}
       SPOTIFY_PUBLIC: {{ spotify_public }}
       SPOTIFY_SECRET: {{ spotify_secret }}
+
   mongo:
     container_name: mongo
     image: mongo:6
@@ -26,6 +27,6 @@ services:
     image: yooooomi/your_spotify_client
     restart: always
     ports:
-      - "80:3000"
+      - "3000:3000"
     environment:
-      API_ENDPOINT: http://{{ inventory_hostname }}.{{ dns_root_domain }}:8080
+      API_ENDPOINT: https://yourspotifyapi.{{ domain }}

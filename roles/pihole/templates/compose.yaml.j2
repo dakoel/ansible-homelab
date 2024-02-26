@@ -15,7 +15,3 @@ services:
     volumes:
       - ./pihole:/etc/pihole
       - ./dnsmasq.d:/etc/dnsmasq.d
-    extra_hosts:
-{% for host in groups['all'] %}
-      - "{{ host }}.{{ dns_root_domain }}:{{ hostvars[host]['ansible_host'] }}"
-{% endfor %}

@@ -3,18 +3,21 @@ all:
   children:
     docker_host:
       hosts:
-        pihole:
+        nginx:
           ansible_host: 192.168.0.200
           ansible_user: user
-        nextcloud:
+        pihole:
           ansible_host: 192.168.0.201
           ansible_user: user
-        gitlab:
+        nextcloud:
           ansible_host: 192.168.0.202
           ansible_user: user
-        navidrome:
+        gitlab:
           ansible_host: 192.168.0.203
           ansible_user: user
-        yourspotify:
+        navidrome:
           ansible_host: 192.168.0.204
+          ansible_user: user
+        yourspotify:
+          ansible_host: 192.168.0.205
           ansible_user: user

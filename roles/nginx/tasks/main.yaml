@@ -1,0 +1,29 @@
+---
+- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}/certs
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs"
+    state: directory
+
+- name: Copy homelab.crt
+  ansible.builtin.copy:
+    src: homelab.crt
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/homelab.crt"
+
+- name: Copy homelab.key
+  ansible.builtin.copy:
+    content: "{{ homelab_key }}"
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/homelab.key"
+
+- name: Copy nginx.conf
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/nginx.conf"
+
+- name: Copy compose.yaml
+  ansible.builtin.copy:
+    src: compose.yaml
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/compose.yaml"
+
+- name: Ensure docker compose is up and running
+  community.docker.docker_compose:
+    project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
