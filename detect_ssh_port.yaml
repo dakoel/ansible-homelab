@@ -1,5 +1,5 @@
 ---
-- hosts: gitlab
+- hosts: gitea
   gather_facts: no  # necessary to test SSH port
   tasks:
     - name: Test SSH port {{ sshd_port }}

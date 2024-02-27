@@ -4,7 +4,7 @@
 - import_playbook: reverseproxy.yaml
 - import_playbook: pihole.yaml
 - import_playbook: nextcloud.yaml
-- import_playbook: gitlab.yaml
+- import_playbook: gitea.yaml
 - import_playbook: navidrome.yaml
 - import_playbook: yourspotify.yaml
 - import_playbook: wireguard.yaml

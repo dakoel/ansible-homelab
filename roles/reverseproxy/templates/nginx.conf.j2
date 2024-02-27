@@ -27,13 +27,13 @@ http {
 
     server {
         listen 443 ssl;
-        server_name gitlab.{{ domain }};
+        server_name gitea.{{ domain }};
 
         ssl_certificate /etc/nginx/certs/homelab.crt;
         ssl_certificate_key /etc/nginx/certs/homelab.key;
 
         location / {
-            proxy_pass http://{{ hostvars['gitlab'].ansible_host }};
+            proxy_pass http://{{ hostvars['gitea'].ansible_host }}:3000;
         }
     }
 
