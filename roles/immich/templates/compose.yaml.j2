@@ -1,0 +1,66 @@
+---
+version: "3.8"
+
+services:
+  immich-server:
+    container_name: immich_server
+    image: ghcr.io/immich-app/immich-server:release
+    command: [ "start.sh", "immich" ]
+    environment:
+      DB_HOSTNAME: immich_postgres
+      DB_DATABASE_NAME: immich
+      DB_USERNAME: postgres
+      DB_PASSWORD: {{ db_password }}
+    volumes:
+      - {{ upload_location }}:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 3001:3001
+    depends_on:
+      - redis
+      - database
+    restart: always
+
+  immich-microservices:
+    container_name: immich_microservices
+    image: ghcr.io/immich-app/immich-server:release
+    command: [ "start.sh", "microservices" ]
+    environment:
+      DB_HOSTNAME: immich_postgres
+      DB_DATABASE_NAME: immich
+      DB_USERNAME: postgres
+      DB_PASSWORD: {{ db_password }}
+    volumes:
+      - {{ upload_location }}:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - redis
+      - database
+    restart: always
+
+  immich-machine-learning:
+    container_name: immich_machine_learning
+    image: ghcr.io/immich-app/immich-machine-learning:release
+    volumes:
+      - model-cache:/cache
+    restart: always
+
+  redis:
+    container_name: immich_redis
+    image: redis:6.2-alpine
+    restart: always
+
+  database:
+    container_name: immich_postgres
+    image: tensorchord/pgvecto-rs:pg14-v0.2.0
+    environment:
+      POSTGRES_DB: immich
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: {{ db_password }}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
+  model-cache:

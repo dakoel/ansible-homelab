@@ -8,3 +8,4 @@
 - import_playbook: navidrome.yaml
 - import_playbook: yourspotify.yaml
 - import_playbook: wireguard.yaml
+- import_playbook: immich.yaml

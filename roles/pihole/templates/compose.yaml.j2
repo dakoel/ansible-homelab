@@ -23,3 +23,4 @@ services:
       - "yourspotify.{{ domain }}:{{ hostvars['reverseproxy']['ansible_host'] }}"
       - "yourspotifyapi.{{ domain }}:{{ hostvars['reverseproxy']['ansible_host'] }}"
       - "wireguardui.{{ domain }}:{{ hostvars['reverseproxy']['ansible_host'] }}"
+      - "immich.{{ domain }}:{{ hostvars['reverseproxy']['ansible_host'] }}"

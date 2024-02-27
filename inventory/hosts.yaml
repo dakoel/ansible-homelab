@@ -24,3 +24,6 @@ all:
         wireguard:
           ansible_host: 192.168.0.206
           ansible_user: user
+        immich:
+          ansible_host: 192.168.0.207
+          ansible_user: user

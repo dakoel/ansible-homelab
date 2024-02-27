@@ -8,22 +8,27 @@
   ansible.builtin.copy:
     src: homelab.crt
     dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/homelab.crt"
+  register: copy_crt
 
 - name: Copy homelab.key
   ansible.builtin.copy:
     content: "{{ homelab_key }}"
     dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/homelab.key"
+  register: copy_key
 
 - name: Copy nginx.conf
   ansible.builtin.template:
     src: nginx.conf.j2
     dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/nginx.conf"
+  register: copy_conf
 
 - name: Copy compose.yaml
   ansible.builtin.copy:
     src: compose.yaml
     dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/compose.yaml"
+  register: copy_compose
 
 - name: Ensure docker compose is up and running
   community.docker.docker_compose:
     project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
+  when: copy_crt.changed or copy_key.changed or copy_conf.changed or copy_compose.changed

@@ -84,4 +84,16 @@ http {
             proxy_pass http://{{ hostvars['wireguard'].ansible_host }}:51821;
         }
     }
+
+    server {
+        listen 443 ssl;
+        server_name immich.{{ domain }};
+
+        ssl_certificate /etc/nginx/certs/homelab.crt;
+        ssl_certificate_key /etc/nginx/certs/homelab.key;
+
+        location / {
+            proxy_pass http://{{ hostvars['immich'].ansible_host }}:3001;
+        }
+    }
 }
