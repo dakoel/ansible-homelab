@@ -1,7 +1,6 @@
 events {}
 
 http {
-{% if hostvars['pihole'].ansible_host is defined %}
     server {
         listen 443 ssl;
         server_name pihole.{{ domain }};
@@ -13,9 +12,7 @@ http {
             proxy_pass http://{{ hostvars['pihole'].ansible_host }};
         }
     }
-{% endif %}
 
-{% if hostvars['nextcloud'].ansible_host is defined %}
     server {
         listen 443 ssl;
         server_name nextcloud.{{ domain }};
@@ -27,9 +24,7 @@ http {
             proxy_pass http://{{ hostvars['nextcloud'].ansible_host }};
         }
     }
-{% endif %}
 
-{% if hostvars['gitlab'].ansible_host is defined %}
     server {
         listen 443 ssl;
         server_name gitlab.{{ domain }};
@@ -41,9 +36,7 @@ http {
             proxy_pass http://{{ hostvars['gitlab'].ansible_host }};
         }
     }
-{% endif %}
 
-{% if hostvars['navidrome'].ansible_host is defined %}
     server {
         listen 443 ssl;
         server_name navidrome.{{ domain }};
@@ -55,9 +48,7 @@ http {
             proxy_pass http://{{ hostvars['navidrome'].ansible_host }};
         }
     }
-{% endif %}
 
-{% if hostvars['yourspotify'].ansible_host is defined %}
     server {
         listen 443 ssl;
         server_name yourspotify.{{ domain }};
@@ -81,5 +72,16 @@ http {
             proxy_pass http://{{ hostvars['yourspotify'].ansible_host }}:8080;
         }
     }
-{% endif %}
+
+    server {
+        listen 443 ssl;
+        server_name wireguardui.{{ domain }};
+
+        ssl_certificate /etc/nginx/certs/homelab.crt;
+        ssl_certificate_key /etc/nginx/certs/homelab.key;
+
+        location / {
+            proxy_pass http://{{ hostvars['wireguard'].ansible_host }}:51821;
+        }
+    }
 }

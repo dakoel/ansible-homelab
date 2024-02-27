@@ -7,3 +7,4 @@
 - import_playbook: gitlab.yaml
 - import_playbook: navidrome.yaml
 - import_playbook: yourspotify.yaml
+- import_playbook: wireguard.yaml

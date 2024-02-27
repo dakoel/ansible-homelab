@@ -1,7 +1,7 @@
 ---
-- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}/dnsmasq.d
+- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/dnsmasq.d"
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
     state: directory
 
 - name: Create directory /etc/systemd/resolved.conf.d
@@ -40,12 +40,6 @@
     daemon_reload: yes
   become: yes
   when: systemd_resolved.changed
-
-- name: Copy 02-homelab.conf
-  ansible.builtin.template:
-    src: 02-homelab.conf.j2
-    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/dnsmasq.d/02-homelab.conf"
-  become: yes
 
 - name: Copy compose.yaml
   ansible.builtin.template:
