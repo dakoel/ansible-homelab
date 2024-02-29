@@ -1,7 +1,7 @@
 ---
-- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}
+- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}/pihole
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/pihole"
     state: directory
 
 - name: Create directory /etc/systemd/resolved.conf.d
@@ -40,6 +40,12 @@
     daemon_reload: yes
   become: yes
   when: systemd_resolved.changed
+
+- name: Copy custom.list
+  ansible.builtin.template:
+    src: custom.list.j2
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/pihole/custom.list"
+  become: yes
 
 - name: Copy compose.yaml
   ansible.builtin.template:
