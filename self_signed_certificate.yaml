@@ -27,3 +27,17 @@
         csr_path: "./outputs/{{ domain }}.csr"
         provider: selfsigned
         selfsigned_not_after: +3650d
+
+    - name: Encrypt certificate
+      include_role:
+        name: encrypt_string
+      vars:
+        name: ssl_certificate
+        string: "{{ lookup('ansible.builtin.file', './outputs/' + domain + '.crt') }}"
+
+    - name: Encrypt private key
+      include_role:
+        name: encrypt_string
+      vars:
+        name: ssl_certificate_key
+        string: "{{ lookup('ansible.builtin.file', './outputs/' + domain + '.key') }}"

@@ -1,0 +1,11 @@
+---
+- name: Encrypt string
+  shell: ansible-vault encrypt_string --vault-pass-file .vault-pass '{{ string }}' --name {{ name }}
+  register: encrypted_string
+  no_log: true
+
+- name: Write the encrypted string to .outputs/{{ name }}.yaml
+  copy:
+    content: "{{ encrypted_string.stdout }}"
+    dest: "./outputs/{{ name }}.yaml"
+
