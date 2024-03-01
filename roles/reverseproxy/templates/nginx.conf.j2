@@ -5,8 +5,8 @@ http {
         listen 443 ssl;
         server_name pihole.{{ domain }};
 
-        ssl_certificate /etc/nginx/certs/homelab.crt;
-        ssl_certificate_key /etc/nginx/certs/homelab.key;
+        ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
+        ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
 
         location / {
             proxy_pass http://{{ hostvars['pihole'].ansible_host }};
@@ -18,8 +18,8 @@ http {
         listen 443 ssl;
         server_name nextcloud.{{ domain }};
 
-        ssl_certificate /etc/nginx/certs/homelab.crt;
-        ssl_certificate_key /etc/nginx/certs/homelab.key;
+        ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
+        ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
 
         location / {
             proxy_pass http://{{ hostvars['nextcloud'].ansible_host }};
@@ -30,8 +30,8 @@ http {
         listen 443 ssl;
         server_name gitea.{{ domain }};
 
-        ssl_certificate /etc/nginx/certs/homelab.crt;
-        ssl_certificate_key /etc/nginx/certs/homelab.key;
+        ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
+        ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
 
         location / {
             proxy_pass http://{{ hostvars['gitea'].ansible_host }}:3000;
@@ -42,8 +42,8 @@ http {
         listen 443 ssl;
         server_name navidrome.{{ domain }};
 
-        ssl_certificate /etc/nginx/certs/homelab.crt;
-        ssl_certificate_key /etc/nginx/certs/homelab.key;
+        ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
+        ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
 
         location / {
             proxy_pass http://{{ hostvars['navidrome'].ansible_host }};
@@ -54,8 +54,8 @@ http {
         listen 443 ssl;
         server_name yourspotify.{{ domain }};
 
-        ssl_certificate /etc/nginx/certs/homelab.crt;
-        ssl_certificate_key /etc/nginx/certs/homelab.key;
+        ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
+        ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
 
         location / {
             proxy_pass http://{{ hostvars['yourspotify'].ansible_host }}:3000;
@@ -66,8 +66,8 @@ http {
         listen 443 ssl;
         server_name yourspotifyapi.{{ domain }};
 
-        ssl_certificate /etc/nginx/certs/homelab.crt;
-        ssl_certificate_key /etc/nginx/certs/homelab.key;
+        ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
+        ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
 
         location / {
             proxy_pass http://{{ hostvars['yourspotify'].ansible_host }}:8080;
@@ -78,8 +78,8 @@ http {
         listen 443 ssl;
         server_name wireguardui.{{ domain }};
 
-        ssl_certificate /etc/nginx/certs/homelab.crt;
-        ssl_certificate_key /etc/nginx/certs/homelab.key;
+        ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
+        ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
 
         location / {
             proxy_pass http://{{ hostvars['wireguard'].ansible_host }}:51821;
@@ -90,23 +90,11 @@ http {
         listen 443 ssl;
         server_name immich.{{ domain }};
 
-        ssl_certificate /etc/nginx/certs/homelab.crt;
-        ssl_certificate_key /etc/nginx/certs/homelab.key;
+        ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
+        ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
 
         location / {
             proxy_pass http://{{ hostvars['immich'].ansible_host }}:3001;
-        }
-    }
-
-    server {
-        listen 443 ssl;
-        server_name netdata.{{ domain }};
-
-        ssl_certificate /etc/nginx/certs/homelab.crt;
-        ssl_certificate_key /etc/nginx/certs/homelab.key;
-
-        location / {
-            proxy_pass http://{{ hostvars['netdata'].ansible_host }}:19999;
         }
     }
 }

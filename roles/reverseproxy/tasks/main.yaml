@@ -4,16 +4,16 @@
     path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs"
     state: directory
 
-- name: Copy homelab.crt
+- name: Copy {{ domain }}.crt
   ansible.builtin.copy:
-    src: homelab.crt
-    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/homelab.crt"
+    content: "{{ ssl_certificate }}"
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/{{ domain }}.crt"
   register: copy_crt
 
-- name: Copy homelab.key
+- name: Copy {{ domain }}.key
   ansible.builtin.copy:
-    content: "{{ homelab_key }}"
-    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/homelab.key"
+    content: "{{ ssl_certificate_key }}"
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/{{ domain }}.key"
   register: copy_key
 
 - name: Copy nginx.conf
