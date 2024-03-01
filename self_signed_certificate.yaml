@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Create directory ./outputs
+      ansible.builtin.file:
+        path: ./outputs
+        state: directory
+
+    - name: Generate private key
+      ansible.builtin.openssl_privatekey:
+        path: "./outputs/{{ domain }}.key"
+        size: 2048
+
+    - name: Generate CSR
+      ansible.builtin.openssl_csr:
+        path: "./outputs/{{ domain }}.csr"
+        privatekey_path: "./outputs/{{ domain }}.key"
+        common_name: "{{ domain }}"
+        subject_alt_name:
+          - "DNS:*.{{ domain }}"
+          - "IP:{{ hostvars['reverseproxy'].ansible_host }}"
+
+    - name: Generate self-signed certificate
+      ansible.builtin.openssl_certificate:
+        path: "./outputs/{{ domain }}.crt"
+        privatekey_path: "./outputs/{{ domain }}.key"
+        csr_path: "./outputs/{{ domain }}.csr"
+        provider: selfsigned
+        selfsigned_not_after: +3650d
