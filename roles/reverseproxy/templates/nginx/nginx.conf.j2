@@ -8,6 +8,28 @@ http {
         return 301 https://$server_name$request_uri;
     }
 
+    # Make specific services accessible via IP for Android
+    server {
+        listen 443 ssl;
+        server_name {{ ansible_host }};
+
+        ssl_certificate /etc/nginx/certs/danielellert.com.crt;
+        ssl_certificate_key /etc/nginx/certs/danielellert.com.key;
+
+        location /nextcloud/ {
+            proxy_pass http://{{ hostvars['nextcloud'].ansible_host }}/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Prefix /nextcloud;
+        }
+
+        location /navidrome/ {
+            proxy_pass http://{{ hostvars['navidrome'].ansible_host }};
+        }
+    }
+
     include pihole.conf;
     include nextcloud.conf;
     include gitea.conf;
