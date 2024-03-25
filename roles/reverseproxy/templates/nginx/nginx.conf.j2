@@ -1,0 +1,18 @@
+events {}
+
+http {
+    server {
+        listen 80;
+        server_name {{ ansible_host }};
+
+        return 301 https://$server_name$request_uri;
+    }
+
+    include pihole.conf;
+    include nextcloud.conf;
+    include gitea.conf;
+    include navidrome.conf;
+    include yourspotify.conf;
+    include wireguard.conf;
+    include immich.conf;
+}

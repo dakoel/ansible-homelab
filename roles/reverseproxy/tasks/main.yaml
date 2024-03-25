@@ -1,34 +1,53 @@
 ---
-- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}/certs
+- name: Create deployment directory
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs"
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
     state: directory
+    mode: "755"
 
-- name: Copy {{ domain }}.crt
+- name: Create nginx directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/nginx"
+    state: directory
+    mode: "755"
+
+- name: Copy nginx configuration files
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/nginx/{{ item | basename | regex_replace('\\.j2$', '') }}"
+    mode: "644"
+  with_fileglob:
+    - "templates/nginx/*.conf.j2"
+  register: copy_conf
+
+- name: Create certs directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/nginx/certs"
+    state: directory
+    mode: "755"
+
+- name: Copy SSL certificate
   ansible.builtin.copy:
     content: "{{ ssl_certificate }}"
-    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/{{ domain }}.crt"
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/nginx/certs/{{ domain }}.crt"
+    mode: "644"
   register: copy_crt
 
-- name: Copy {{ domain }}.key
+- name: Copy SSL certificate key
   ansible.builtin.copy:
     content: "{{ ssl_certificate_key }}"
-    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/certs/{{ domain }}.key"
+    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/nginx/certs/{{ domain }}.key"
+    mode: "644"
   register: copy_key
-
-- name: Copy nginx.conf
-  ansible.builtin.template:
-    src: nginx.conf.j2
-    dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/nginx.conf"
-  register: copy_conf
 
 - name: Copy compose.yaml
   ansible.builtin.copy:
     src: compose.yaml
     dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/compose.yaml"
+    mode: "644"
   register: copy_compose
 
 - name: Ensure docker compose is up and running
   community.docker.docker_compose:
     project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
-  when: copy_crt.changed or copy_key.changed or copy_conf.changed or copy_compose.changed
+  when: copy_conf.changed or copy_crt.changed or copy_key.changed or copy_compose.changed

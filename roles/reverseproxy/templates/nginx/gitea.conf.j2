@@ -1,0 +1,11 @@
+server {
+    listen 443 ssl;
+    server_name gitea.{{ domain }};
+
+    ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
+    ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
+
+    location / {
+        proxy_pass http://{{ hostvars['gitea'].ansible_host }}:3000;
+    }
+}
