@@ -1,13 +1,13 @@
 ---
 - name: Update sshd_config
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^#?Port'
     line: "Port {{ sshd_port }}"
   become: true
   notify: Restart sshd
 
-- name: flush handlers
+- name: Flush handlers
   ansible.builtin.meta: flush_handlers
 
 - name: Gather facts
