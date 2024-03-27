@@ -1,8 +1,9 @@
 ---
-- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}/pihole
+- name: Create configuration directory
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/pihole"
     state: directory
+    mode: "755"
 
 - name: Create directory /etc/systemd/resolved.conf.d
   ansible.builtin.file:

@@ -50,3 +50,9 @@
 
 - name: Reconnect to the remote host
   ansible.builtin.meta: reset_connection
+
+- name: Create deployment directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
+    state: directory
+    mode: "755"

@@ -1,9 +1,4 @@
 ---
-- name: Create directory {{ ansible_env.HOME }}/{{ inventory_hostname }}
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
-    state: directory
-
 - name: Copy compose.yaml
   ansible.builtin.template:
     src: compose.yaml.j2
