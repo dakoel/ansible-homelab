@@ -10,7 +10,7 @@
     state: directory
     owner: root
     group: root
-    mode: '0755'
+    mode: "755"
   become: true
 
 - name: Disable DNSStubListener in systemd-resolved
@@ -21,7 +21,7 @@
       DNSStubListener=no
     owner: root
     group: root
-    mode: "0644"
+    mode: "644"
   become: true
   register: systemd_resolved
 
