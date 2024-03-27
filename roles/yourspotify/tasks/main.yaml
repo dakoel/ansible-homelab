@@ -3,6 +3,7 @@
   ansible.builtin.template:
     src: compose.yaml.j2
     dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/compose.yaml"
+    mode: "644"
 
 - name: Ensure docker compose is up and running
   community.docker.docker_compose:
