@@ -1,6 +1,8 @@
 ---
 - name: Install your_spotify
   hosts: yourspotify
+  handlers:
+    - import_tasks: handlers.yaml
   roles:
     - prepare_environment
     - yourspotify

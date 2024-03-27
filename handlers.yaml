@@ -1,5 +1,12 @@
 ---
-- name: Restart docker containers
-  community.docker.docker_compose:
+- name: Stop docker compose
+  community.docker.docker_compose_v2:
     project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
-    restarted: true
+    state: stopped
+  listen: Restart docker compose
+
+- name: Start docker compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
+    state: present
+  listen: Restart docker compose

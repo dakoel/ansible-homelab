@@ -1,6 +1,8 @@
 ---
 - name: Install Nextcloud
   hosts: nextcloud
+  handlers:
+    - import_tasks: handlers.yaml
   roles:
     - prepare_environment
     - nextcloud

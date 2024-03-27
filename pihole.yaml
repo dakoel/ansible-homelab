@@ -1,6 +1,8 @@
 ---
 - name: Install Pi-Hole
   hosts: pihole
+  handlers:
+    - import_tasks: handlers.yaml
   roles:
     - prepare_environment
     - pihole

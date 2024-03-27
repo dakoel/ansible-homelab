@@ -1,6 +1,8 @@
 ---
 - name: Setup Nginx reverse proxy
   hosts: reverseproxy
+  handlers:
+    - import_tasks: handlers.yaml
   roles:
     - prepare_environment
     - reverseproxy

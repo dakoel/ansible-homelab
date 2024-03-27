@@ -4,4 +4,4 @@
     src: compose.yaml.j2
     dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/compose.yaml"
     mode: "644"
-  notify: Restart docker containers
+  notify: Restart docker compose
