@@ -1,4 +1,7 @@
 ---
+your_spotify_server_tag: 1.10.1
+your_spotify_client_tag: 1.10.1
+mongo_tag: 6
 spotify_public: !vault |
   $ANSIBLE_VAULT;1.1;AES256
   38343537346539356130346639626532613863386336383839623363353163616331396636653736

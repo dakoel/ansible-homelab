@@ -1,4 +1,6 @@
 ---
+nextcloud_tag: 28.0.3-apache
+postgres_tag: alpine3.19
 nextcloud_admin_user: daniel
 nextcloud_admin_password: !vault |
   $ANSIBLE_VAULT;1.1;AES256

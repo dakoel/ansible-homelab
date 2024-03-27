@@ -35,8 +35,8 @@
   notify: Restart docker compose
 
 - name: Copy compose.yaml
-  ansible.builtin.copy:
-    src: compose.yaml
+  ansible.builtin.template:
+    src: compose.yaml.j2
     dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/compose.yaml"
     mode: "644"
   notify: Restart docker compose

@@ -27,7 +27,7 @@ http {
         }
 
         location /navidrome/ {
-            proxy_pass http://{{ hostvars['navidrome'].ansible_host }};
+            proxy_pass http://{{ hostvars['navidrome'].ansible_host }}:4533;
 
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;

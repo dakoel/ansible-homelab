@@ -1,11 +1,11 @@
 ---
 services:
   gitea:
-    image: gitea/gitea:latest
+    image: gitea/gitea:{{ gitea_tag }}
+    restart: always
     environment:
       - USER_UID=1000
       - USER_GID=1000
-    restart: always
     volumes:
       - ./gitea:/data
       - /etc/timezone:/etc/timezone:ro

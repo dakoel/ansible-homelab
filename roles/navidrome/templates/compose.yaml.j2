@@ -1,13 +1,13 @@
 ---
 services:
   navidrome:
-    image: deluan/navidrome:latest
-    ports:
-      - "80:4533"
-    restart: unless-stopped
+    image: deluan/navidrome:{{ navidrome_tag }}
+    restart: always
     environment:
         ND_SCANSCHEDULE: 0
         ND_BASEURL: /navidrome
     volumes:
       - ./data:/data
       - ./music:/music:ro
+    ports:
+      - "4533:4533"

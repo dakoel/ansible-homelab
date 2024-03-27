@@ -1,11 +1,11 @@
 ---
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:{{ nginx_tag }}
+    restart: always
     volumes:
       - ./nginx:/etc/nginx
       - ./logs:/var/log/nginx
     ports:
       - "80:80"
       - "443:443"
-    restart: always
