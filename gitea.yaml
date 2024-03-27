@@ -2,7 +2,10 @@
 - name: Install Gitea
   hosts: gitea
   gather_facts: false # necessary for set_sshd_port
+  handlers:
+    - ansible.builtin.import_tasks: handlers.yaml
   roles:
+    - detect_ssh_port
     - set_sshd_port
     - prepare_environment
     - gitea

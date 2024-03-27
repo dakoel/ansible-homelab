@@ -1,0 +1,13 @@
+---
+- name: Test SSH port {{ sshd_port }}
+  ansible.builtin.wait_for:
+    port: "{{ sshd_port }}"
+    timeout: 5
+    host: "{{ ansible_host }}"
+  register: port_test
+  ignore_errors: true
+  delegate_to: localhost
+
+- name: Set ansible_ssh_port
+  ansible.builtin.set_fact:
+    ansible_ssh_port: "{% if port_test.elapsed < 5 %}{{ sshd_port }}{% else %}22{% endif %}"

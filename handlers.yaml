@@ -1,0 +1,5 @@
+---
+- name: Restart docker containers
+  community.docker.docker_compose:
+    project_src: "{{ ansible_env.HOME }}/{{ inventory_hostname }}"
+    restarted: true
