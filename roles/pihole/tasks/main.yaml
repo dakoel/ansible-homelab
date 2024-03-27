@@ -4,6 +4,7 @@
     path: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/pihole"
     state: directory
     mode: "755"
+  become: true
 
 - name: Create directory /etc/systemd/resolved.conf.d
   ansible.builtin.file:
@@ -24,23 +25,10 @@
     group: root
     mode: "644"
   become: true
-  register: systemd_resolved
+  notify: Restart services
 
-- name: Restart systemd-resolved to apply changes
-  ansible.builtin.systemd:
-    name: systemd-resolved
-    state: restarted
-    daemon_reload: true
-  become: true
-  when: systemd_resolved.changed
-
-- name: Restart docker to apply changes
-  ansible.builtin.systemd:
-    name: docker
-    state: restarted
-    daemon_reload: true
-  become: true
-  when: systemd_resolved.changed
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Copy custom.list
   ansible.builtin.template:
