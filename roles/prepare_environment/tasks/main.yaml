@@ -1,40 +1,52 @@
 ---
+- name: Set timezone to Europe/Berlin
+  timezone:
+    name: Europe/Berlin
+  become: true
+
+- name: Update and upgrade apt packages
+  ansible.builtin.apt:
+    upgrade: true
+    update_cache: true
+    cache_valid_time: 600
+  become: true
+
 - name: Add docker GPG apt key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
-  become: yes
+  become: true
 
 - name: Add docker repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
     state: present
-  become: yes
+  become: true
 
 - name: Install docker-ce
-  apt:
+  ansible.builtin.apt:
     name: docker-ce
     update_cache: true
-  become: yes
+  become: true
 
 - name: Install pip
-  apt:
+  ansible.builtin.apt:
     name: python3-pip
     update_cache: true
-  become: yes
+  become: true
 
 - name: Install docker and docker-compose pip module
-  pip:
+  ansible.builtin.pip:
     name:
       - docker==6.1.3
       - docker-compose
 
-- name: Add {{ ansible_user }} to docker group
+- name: Add user to docker group
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     groups: docker
-    append: yes
-  become: yes
+    append: true
+  become: true
 
 - name: Reconnect to the remote host
-  meta: reset_connection
+  ansible.builtin.meta: reset_connection

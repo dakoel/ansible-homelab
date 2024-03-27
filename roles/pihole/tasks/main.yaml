@@ -11,7 +11,7 @@
     owner: root
     group: root
     mode: '0755'
-  become: yes
+  become: true
 
 - name: Disable DNSStubListener in systemd-resolved
   ansible.builtin.copy:
@@ -22,30 +22,30 @@
     owner: root
     group: root
     mode: "0644"
-  become: yes
+  become: true
   register: systemd_resolved
 
 - name: Restart systemd-resolved to apply changes
   ansible.builtin.systemd:
     name: systemd-resolved
     state: restarted
-    daemon_reload: yes
-  become: yes
+    daemon_reload: true
+  become: true
   when: systemd_resolved.changed
 
 - name: Restart docker to apply changes
   ansible.builtin.systemd:
     name: docker
     state: restarted
-    daemon_reload: yes
-  become: yes
+    daemon_reload: true
+  become: true
   when: systemd_resolved.changed
 
 - name: Copy custom.list
   ansible.builtin.template:
     src: custom.list.j2
     dest: "{{ ansible_env.HOME }}/{{ inventory_hostname }}/pihole/custom.list"
-  become: yes
+  become: true
 
 - name: Copy compose.yaml
   ansible.builtin.template:

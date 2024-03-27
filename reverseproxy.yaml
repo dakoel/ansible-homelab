@@ -1,5 +1,6 @@
 ---
-- hosts: reverseproxy
+- name: Setup Nginx reverse proxy
+  hosts: reverseproxy
   roles:
-    - docker
+    - prepare_environment
     - reverseproxy

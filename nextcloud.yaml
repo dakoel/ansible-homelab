@@ -1,5 +1,6 @@
 ---
-- hosts: nextcloud
+- name: Install Nextcloud
+  hosts: nextcloud
   roles:
-    - docker
+    - prepare_environment
     - nextcloud

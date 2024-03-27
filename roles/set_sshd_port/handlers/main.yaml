@@ -3,7 +3,7 @@
   ansible.builtin.service:
     name: sshd
     state: restarted
-  become: yes
+  become: true
   notify: 
     - Reset connection
     - Set ansible_ssh_port

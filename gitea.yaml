@@ -1,7 +1,8 @@
 ---
-- hosts: gitea
-  gather_facts: no  # necessary for set_sshd_port
+- name: Install Gitea
+  hosts: gitea
+  gather_facts: false # necessary for set_sshd_port
   roles:
     - set_sshd_port
-    - docker
+    - prepare_environment
     - gitea

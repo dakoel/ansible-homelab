@@ -1,5 +1,6 @@
 ---
-- hosts: pihole
+- name: Install Pi-Hole
+  hosts: pihole
   roles:
-    - docker
+    - prepare_environment
     - pihole

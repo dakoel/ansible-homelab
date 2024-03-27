@@ -1,5 +1,6 @@
 ---
-- hosts: wireguard
+- name: Install Wireguard
+  hosts: wireguard
   roles:
-    - docker
+    - prepare_environment
     - wireguard

@@ -1,5 +1,6 @@
 ---
-- hosts: navidrome
+- name: Install Navidrome
+  hosts: navidrome
   roles:
-    - docker
+    - prepare_environment
     - navidrome

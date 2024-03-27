@@ -4,7 +4,7 @@
     path: /etc/ssh/sshd_config
     regexp: '^#?Port'
     line: "Port {{ sshd_port }}"
-  become: yes
+  become: true
   notify: Restart sshd
 
 - name: flush handlers

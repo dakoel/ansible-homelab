@@ -1,5 +1,6 @@
 ---
-- hosts: yourspotify
+- name: Install your_spotify
+  hosts: yourspotify
   roles:
-    - docker
+    - prepare_environment
     - yourspotify
