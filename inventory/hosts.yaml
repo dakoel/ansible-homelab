@@ -3,24 +3,24 @@ all:
   children:
     docker_host:
       hosts:
-        reverseproxy:
-          ansible_host: 192.168.0.200
-          ansible_user: user
         pihole:
-          ansible_host: 192.168.0.201
+          ansible_host: 192.168.1.1
           ansible_user: user
-        nextcloud:
-          ansible_host: 192.168.0.202
-          ansible_user: user
-        gitea:
-          ansible_host: 192.168.0.203
-          ansible_user: user
-        navidrome:
-          ansible_host: 192.168.0.204
-          ansible_user: user
-        yourspotify:
-          ansible_host: 192.168.0.205
+        reverseproxy:
+          ansible_host: 192.168.1.2
           ansible_user: user
         wireguard:
-          ansible_host: 192.168.0.206
+          ansible_host: 192.168.1.3
+          ansible_user: user
+        nextcloud:
+          ansible_host: 192.168.1.4
+          ansible_user: user
+        gitea:
+          ansible_host: 192.168.1.5
+          ansible_user: user
+        navidrome:
+          ansible_host: 192.168.1.6
+          ansible_user: user
+        yourspotify:
+          ansible_host: 192.168.1.7
           ansible_user: user
