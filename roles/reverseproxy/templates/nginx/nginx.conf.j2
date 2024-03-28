@@ -16,6 +16,8 @@ http {
         ssl_certificate /etc/nginx/certs/danielellert.com.crt;
         ssl_certificate_key /etc/nginx/certs/danielellert.com.key;
 
+        client_max_body_size 10G;
+
         location /nextcloud/ {
             proxy_pass http://{{ hostvars['nextcloud'].ansible_host }}/;
 
