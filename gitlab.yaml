@@ -1,6 +1,6 @@
 ---
-- name: Install Gitea
-  hosts: gitea
+- name: Install GitLab
+  hosts: gitlab
   gather_facts: false # necessary for set_sshd_port
   handlers:
     - import_tasks: handlers.yaml
@@ -8,4 +8,4 @@
     - detect_ssh_port
     - set_sshd_port
     - prepare_environment
-    - gitea
+    - gitlab

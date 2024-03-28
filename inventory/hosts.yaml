@@ -15,7 +15,7 @@ all:
         nextcloud:
           ansible_host: 192.168.1.4
           ansible_user: user
-        gitea:
+        gitlab:
           ansible_host: 192.168.1.5
           ansible_user: user
         navidrome:

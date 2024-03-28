@@ -1,12 +1,12 @@
 server {
     listen 443 ssl;
-    server_name gitea.{{ domain }};
+    server_name gitlab.{{ domain }};
 
     ssl_certificate /etc/nginx/certs/{{ domain }}.crt;
     ssl_certificate_key /etc/nginx/certs/{{ domain }}.key;
 
     location / {
-        proxy_pass http://{{ hostvars['gitea'].ansible_host }}:3000;
+        proxy_pass http://{{ hostvars['gitlab'].ansible_host }};
 
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
