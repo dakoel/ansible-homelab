@@ -14,6 +14,7 @@ k3s_cluster:
           ansible_host: 10.10.0.3
           ansible_user: user
   vars:
+    argocd_apps_branch: develop
     argocd_cli_version: v2.11.4
     argocd_chart_version: 7.7.16
     argocd_password: password

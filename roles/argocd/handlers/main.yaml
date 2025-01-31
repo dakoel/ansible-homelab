@@ -17,6 +17,6 @@
   listen: Initialize Argo CD
 
 - name: Add apps repository to Argo CD
-  ansible.builtin.command: argocd app create apps --project default --repo {{ argocd_apps_repository }} --path apps --values {{ argocd_values }} --dest-server https://kubernetes.default.svc --sync-policy automated --auto-prune --grpc-web
+  ansible.builtin.command: argocd app create apps --project default --repo {{ argocd_apps_repository }} --revision {{ argocd_apps_branch }} --path apps --values {{ argocd_values }} --dest-server https://kubernetes.default.svc --sync-policy automated --auto-prune --grpc-web
   changed_when: false
   listen: Initialize Argo CD
