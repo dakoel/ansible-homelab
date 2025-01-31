@@ -1,0 +1,33 @@
+---
+- name: Create directory ~/traefik-certs
+  ansible.builtin.file:
+    path: ~{{ ansible_user }}/traefik-certs
+    state: directory
+    owner: "{{ ansible_user }}"
+    mode: "u=rwx,g=rx,o="
+
+- name: Generate private key
+  ansible.builtin.openssl_privatekey:
+    path: ~{{ ansible_user }}/traefik-certs/{{ domain }}.key
+    size: 2048
+
+- name: Generate CSR
+  ansible.builtin.openssl_csr:
+    path: ~{{ ansible_user }}/traefik-certs/{{ domain }}.csr
+    privatekey_path: ~{{ ansible_user }}/traefik-certs/{{ domain }}.key
+    common_name: "{{ domain }}"
+    subject_alt_name:
+      - "DNS:*.{{ domain }}"
+      - "IP:{{ cluster_ip }}"
+
+- name: Generate self-signed certificate
+  ansible.builtin.openssl_certificate:
+    path: ~{{ ansible_user }}/traefik-certs/{{ domain }}.crt
+    privatekey_path: ~{{ ansible_user }}/traefik-certs/{{ domain }}.key
+    csr_path: ~{{ ansible_user }}/traefik-certs/{{ domain }}.csr
+    provider: selfsigned
+    selfsigned_not_after: +3650d
+
+- name: Create tls-secret
+  become: true
+  ansible.builtin.shell: kubectl create secret tls tls-secret --namespace kube-system --cert ~{{ ansible_user }}/traefik-certs/{{ domain }}.crt --key ~{{ ansible_user }}/traefik-certs/{{ domain }}.key
