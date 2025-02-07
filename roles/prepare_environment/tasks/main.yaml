@@ -234,3 +234,8 @@
         dest: "/var/lib/rancher/k3s/server/manifests"
         mode: "0600"
       loop: "{{ extra_manifests }}"
+
+- name: Install nfs-common
+  ansible.builtin.apt:
+    name: nfs-common
+    update_cache: true
