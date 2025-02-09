@@ -20,4 +20,4 @@ The main entry point is [`site.yaml`](./playbooks/site.yaml), which:
 
 ## Usage
 
-To set up the environment, use the provided Taskfile.
+The easiest way to set up the environment is to install [Task](https://taskfile.dev/) and use the provided [Taskfile.yaml](./Taskfile.yaml).
