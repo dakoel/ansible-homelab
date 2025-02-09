@@ -15,6 +15,7 @@ The main entry point is [`site.yaml`](./playbooks/site.yaml), which:
 
 - Simple multipass-based environment setup
 - Automated cluster deployment and configuration
+- Helm and sealed-secrets preinstalled
 - ArgoCD-based GitOps workflow
 
 ## Usage
