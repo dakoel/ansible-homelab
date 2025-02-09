@@ -1,17 +1,22 @@
 # ansible-homelab
 
+This repository contains an Ansible-based setup for deploying a k3s cluster and installing ArgoCD with predefined applications.
+
+## Overview
+
+The main entry point is [`site.yaml`](./playbooks/site.yaml), which:
+
+- Deploys a k3s cluster
+- Installs ArgoCD
+- Loads the [argocd-homelab](https://github.com/dakoel/argocd-homelab) repository into ArgoCD
+- Deploys applications defined in the `argocd-homelab` repository
+
+## Features
+
+- Simple multipass-based environment setup
+- Automated cluster deployment and configuration
+- ArgoCD-based GitOps workflow
+
 ## Usage
 
-To execute a playbook use:
-
-```console
-ansible-playbook -i <path_to_inventory> <name_of_playbook.yml> --vault-pass-file <path_to_vault_pass>
-```
-
-## Create new certificate for sealed-secrets
-
-```console
-openssl req -x509 -days 3650 -nodes -newkey rsa:4096 -keyout sealed-secrets.key -out sealed-secrets.crt -subj "/CN=sealed-secrets/O=sealed-secrets"
-ansible-vault encrypt --vault-password-file <path_to_vault_pass> sealed-secrets.key
-ansible-vault encrypt --vault-password-file <path_to_vault_pass> sealed-secrets.crt
-```
+To set up the environment, use the provided Taskfile.
