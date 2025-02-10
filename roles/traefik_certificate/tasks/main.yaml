@@ -31,3 +31,4 @@
 - name: Create tls-secret
   become: true
   ansible.builtin.shell: kubectl create secret tls tls-secret --namespace kube-system --cert ~{{ ansible_user }}/traefik-certs/{{ domain }}.crt --key ~{{ ansible_user }}/traefik-certs/{{ domain }}.key
+  ignore_errors: true
