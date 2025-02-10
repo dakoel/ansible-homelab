@@ -9,7 +9,10 @@ tasks:
   default:
     desc: Launch and set up multipass environment
     aliases: [multipass]
-    deps: [multipass-launch, multipass-site, multipass-certificate]
+    cmds:
+      - task: multipass-launch
+      - task: multipass-site
+      - task: multipass-certificate
     silent: true
 
   multipass-launch:
@@ -36,10 +39,9 @@ tasks:
   multipass-delete:
     desc: Delete multipass VMs
     cmds:
-      - ansible-playbook --vault-pass-file {{.VAULT_PASS_FILE}} -i inventory/multipass.yaml playbooks/site.yaml
-      - multipass stop control
-      - multipass stop worker1
-      - multipass stop worker2
+      - multipass stop --force control
+      - multipass stop --force worker1
+      - multipass stop --force worker2
       - multipass delete control
       - multipass delete worker1
       - multipass delete worker2
